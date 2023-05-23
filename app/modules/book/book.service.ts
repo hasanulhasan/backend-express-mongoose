@@ -17,6 +17,12 @@ export const getBooksByGenreAndPublisher = async (payload1: string, payload2: st
   return books
 }
 
+export const getRatedBooks = async () => {
+  const bestSeller = await Book.getRatedBooks();
+  console.log(bestSeller)
+  return bestSeller
+}
+
 export const makePriceInt = async () => {
   const books = await Book.updateMany(
     { publicationYear: { $gte: 2020 } },

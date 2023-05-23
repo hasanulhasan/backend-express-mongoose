@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
-import { IBook } from "./book.interface";
+import { BookModel, IBook, IBookMethods} from "./book.interface";
 
-export const bookSchema = new Schema<IBook>({
-  id: {type: String, required: true, unique: true},
+export const bookSchema = new Schema<IBook, BookModel, IBookMethods>({
+  id: { type: String, required: true, unique: true },
   title: {
     type: String,
     required: true,
@@ -37,4 +37,12 @@ export const bookSchema = new Schema<IBook>({
   },
 });
 
-export const Book = model<IBook>('Book', bookSchema)
+//static function
+bookSchema.static('getRatedBooks', async function getRatedBooks() {
+  const ratingsBooks = await this.find({ rating: {$gte: 4} });
+  console.log(ratingsBooks)
+  return ratingsBooks
+});
+
+
+export const Book = model<IBook, BookModel>('Book', bookSchema)

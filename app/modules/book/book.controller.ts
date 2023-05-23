@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { createBookToDB, getBooksByGenre, getBooksByGenreAndPublisher, makePriceInt } from "./book.service";
+import { createBookToDB, getBooksByGenre, getBooksByGenreAndPublisher, getRatedBooks, makePriceInt } from "./book.service";
 
 export const createBook = async (req: Request, res: Response, next: NextFunction) => {
   const data = req.body;
@@ -46,4 +46,15 @@ export const makeInt = async (req: Request, res: Response, next: NextFunction) =
     }
   )
   console.log(`type of price of ${books.modifiedCount} books updated`)
+}
+
+export const getBestSeller = async (req: Request, res: Response, next: NextFunction) => {
+  const books = await getRatedBooks();
+  res.status(200).json(
+    {
+      status: 'success',
+      data: books
+    }
+  )
+  console.log(`bestseller book found`)
 }
