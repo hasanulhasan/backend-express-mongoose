@@ -1,9 +1,10 @@
 import express from 'express'
-import { createBook, getByGenre } from './book.controller';
+import { createBook, getByGenre, getByGenreAndPublisher } from './book.controller';
 
 const router = express.Router();
 
 router.post('/create-book', createBook)
 router.get('/genre', getByGenre)
+router.get('/genreAndPublisher', getByGenreAndPublisher)
 
 export default router;

@@ -11,3 +11,8 @@ export const getBooksByGenre = async () => {
   const books = await Book.find({ genre: "Fantacy" });
   return books
 }
+
+export const getBooksByGenreAndPublisher = async () => {
+  const books = await Book.find({ genre: "Sci-Fi", "publisher.name": "Roli Books" });
+  return books
+}
