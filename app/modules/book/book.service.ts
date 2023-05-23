@@ -18,9 +18,8 @@ export const getBooksByGenreAndPublisher = async (payload1: string, payload2: st
 }
 
 export const getRatedBooks = async () => {
-  const bestSeller = await Book.getRatedBooks();
-  console.log(bestSeller)
-  return bestSeller
+  const ratedBook = await Book.getRatedBooks();
+  return ratedBook
 }
 
 export const makePriceInt = async () => {

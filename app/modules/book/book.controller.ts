@@ -48,7 +48,7 @@ export const makeInt = async (req: Request, res: Response, next: NextFunction) =
   console.log(`type of price of ${books.modifiedCount} books updated`)
 }
 
-export const getBestSeller = async (req: Request, res: Response, next: NextFunction) => {
+export const getFeatured = async (req: Request, res: Response, next: NextFunction) => {
   const books = await getRatedBooks();
   res.status(200).json(
     {
@@ -56,5 +56,5 @@ export const getBestSeller = async (req: Request, res: Response, next: NextFunct
       data: books
     }
   )
-  console.log(`bestseller book found`)
+  console.log(`bestseller and popular tag added on specified book`)
 }
