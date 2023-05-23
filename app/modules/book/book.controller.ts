@@ -14,23 +14,25 @@ export const createBook = async (req: Request, res: Response, next: NextFunction
 };
 
 export const getByGenre = async (req: Request, res: Response, next: NextFunction) => {
-  const books = await getBooksByGenre();
+  const {genre} = req.params;
+  const books = await getBooksByGenre(genre);
   res.status(200).json(
     {
       status: 'success',
       data: books
     }
   )
-  console.log('books by genre shown in webpage')
+  console.log(`books by ${genre} shown in webpage`)
 }
 
 export const getByGenreAndPublisher = async (req: Request, res: Response, next: NextFunction) => {
-  const books = await getBooksByGenreAndPublisher();
+  const {genre, publisher} = req.params;
+  const books = await getBooksByGenreAndPublisher(genre, publisher);
   res.status(200).json(
     {
       status: 'success',
       data: books
     }
   )
-  console.log('books by genre and Publisher shown in webpage')
+  console.log(`books by ${genre} and ${publisher} shown in webpage`)
 }

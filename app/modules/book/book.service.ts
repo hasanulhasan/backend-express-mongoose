@@ -7,12 +7,12 @@ export const createBookToDB = async (payload: IBook): Promise<IBook> => {
   return book
 }
 
-export const getBooksByGenre = async () => {
-  const books = await Book.find({ genre: "Fantacy" });
+export const getBooksByGenre = async (payload:string) => {
+  const books = await Book.find({ genre: payload });
   return books
 }
 
-export const getBooksByGenreAndPublisher = async () => {
-  const books = await Book.find({ genre: "Sci-Fi", "publisher.name": "Roli Books" });
+export const getBooksByGenreAndPublisher = async (payload1:string, payload2:string) => {
+  const books = await Book.find({ genre: payload1, "publisher.name": payload2 });
   return books
 }
