@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { createBookToDB } from "./book.service";
+import { createBookToDB, getBooksByGenre } from "./book.service";
 
 export const createBook = async (req: Request, res: Response, next: NextFunction) => {
   const data = req.body;
@@ -10,5 +10,16 @@ export const createBook = async (req: Request, res: Response, next: NextFunction
       data: book
     }
   )
-  console.log('req done in dev side')
+  console.log('book added')
 };
+
+export const getByGenre = async (req: Request, res: Response, next: NextFunction) => {
+  const books = await getBooksByGenre();
+  res.status(200).json(
+    {
+      status: 'success',
+      data: books
+    }
+  )
+  console.log('books by genre shown in webpage')
+}
