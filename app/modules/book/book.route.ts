@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/create-book', createBook)
 router.get('/priceUpdate', makeInt)
-router.get('/bestSeller', getBestSeller)
+router.get('/featured', getBestSeller)
 router.get('/:genre', getByGenre)
 router.get('/:genre/:publisher', getByGenreAndPublisher)
 

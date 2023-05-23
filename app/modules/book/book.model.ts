@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { BookModel, IBook, IBookMethods} from "./book.interface";
+import { BookModel, IBook, IBookMethods } from "./book.interface";
 
 export const bookSchema = new Schema<IBook, BookModel, IBookMethods>({
   id: { type: String, required: true, unique: true },
@@ -39,9 +39,14 @@ export const bookSchema = new Schema<IBook, BookModel, IBookMethods>({
 
 //static function
 bookSchema.static('getRatedBooks', async function getRatedBooks() {
-  const ratingsBooks = await this.find({ rating: {$gte: 4} });
-  console.log(ratingsBooks)
-  return ratingsBooks
+  const featuredBooks = await this.aggregate([
+    { $match: { rating: { $gte: 4 } } },
+    { $addFields: { "featured": "popular" } },
+    { $match: { rating: { $gte: 4.5 } } },
+    { $addFields: { "featured": "bestseller" } },
+  ]);
+  console.log(featuredBooks)
+  return featuredBooks
 });
 
 
